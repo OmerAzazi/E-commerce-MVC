@@ -27,9 +27,13 @@ namespace E_commerce.Controllers
         public IActionResult Create(Category obj)
             // obj is the data that we get form the website 
         {
-            _db.Categories.Add(obj);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
