@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using E_commerce.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_commerce.Data
 {
@@ -10,6 +11,7 @@ namespace E_commerce.Data
         }
 
         // Define your DbSets (tables) here
-        // public DbSet<YourEntity> YourEntities { get; set; }
+        // public DbSet<YourEntity> YourEntities { get; set; } To Create a table in Db
+        public DbSet <Category> Categories { get; set; }
     }
 }
