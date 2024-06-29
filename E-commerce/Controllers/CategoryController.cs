@@ -18,6 +18,8 @@ namespace E_commerce.Controllers
             return View(objCategoryList);
         }
 
+
+        // For Create we have both getter and setter action method.
         public IActionResult Create()
         {
             return View();
@@ -25,11 +27,38 @@ namespace E_commerce.Controllers
 
         [HttpPost] //Bz of the form
         public IActionResult Create(Category obj)
-            // obj is the data that we get form the website 
+        // obj is the data that we get form the website 
         {
             if (ModelState.IsValid)
             {
                 _db.Categories.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if(id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Category CategoryFromDb = _db.Categories.Find(id);
+            if(CategoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(CategoryFromDb);
+        }
+
+        [HttpPost] //Bz of the form
+        public IActionResult Edit(Category obj)
+        // obj is the data that we get form the website 
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Update(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
