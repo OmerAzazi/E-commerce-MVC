@@ -1,4 +1,6 @@
 using E_commerce.DataAccess.Data;
+using E_commerce.DataAccess.Repository.IRepository;
+using E_commerce.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         new MySqlServerVersion(new Version(10, 4, 24)) // MariaDB version
     )
 );
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
 
 var app = builder.Build();
 
