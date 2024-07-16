@@ -14,6 +14,8 @@ namespace E_commerce.DataAccess.Data
         // Define your DbSets (tables) here
         // public DbSet<YourEntity> YourEntities { get; set; } To Create a table in Db
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             // Why this action and ModelBuilder ? Bz its the thing that entity framework has implement and we just using it to seed data and this why we use Override
