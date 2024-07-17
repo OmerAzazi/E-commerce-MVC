@@ -1,6 +1,7 @@
 ﻿using E_commerce.DataAccess.Repository.IRepository;
 using E_commerce.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace E_commerce.Areas.Admin.Controllers
 {
@@ -8,10 +9,13 @@ namespace E_commerce.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepo;
-        public ProductController(IProductRepository db)
+        private readonly ICategoryRepository _categoryRepo;
+
+        public ProductController(IProductRepository Pdb, ICategoryRepository Cdb) // I just have to change the db name to not make them both the same
         // We already have the method in program.cs so we just call it 
         {
-            _productRepo = db;
+            _productRepo = Pdb;
+            _categoryRepo = Cdb;
         }
 
         public IActionResult Index()
@@ -26,6 +30,13 @@ namespace E_commerce.Areas.Admin.Controllers
         // Create Section
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> CategoryList = _categoryRepo.GetAll().Select(u => new SelectListItem
+            {
+              Text = u.Name,
+              Value = u.Id.ToString()
+            });
+
+            ViewBag.CategoryList = CategoryList;
             return View();
         }
 
