@@ -23,6 +23,7 @@ namespace E_commerce.DataAccess.Repository
 
         public void Update(Product obj)
         {
+            // Bz we know the name of the table that why we dont use DbSet here
             _db.Products.Update(obj);
         }
     }

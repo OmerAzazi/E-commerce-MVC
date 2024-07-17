@@ -27,13 +27,15 @@ namespace E_commerce.DataAccess.Repository
 
         public IEnumerable<T> GetAll()
         {
-            IQueryable<T> query = DbSet; // Why i need to define DbSet like this ?
+            // DbSet = _db + (Table name[T]) We send the table name during _productRepo 
+            IQueryable<T> query = DbSet;
             return query.ToList();
 
         }
 
         public T Get(Expression<Func<T, bool>> filter)
         {
+            // FirstOrDefault = to get the one specific info for that item
             IQueryable<T> query = DbSet;
             query = query.Where(filter);
             return query.FirstOrDefault();
